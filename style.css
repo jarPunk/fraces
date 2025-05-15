@@ -1,0 +1,118 @@
+/* Fondo general con degradado azul */
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-size: 100% 100%;
+  background: 
+    linear-gradient(135deg, #2193b080 100%, #6dd5ed80 100%),
+    url('https://images.unsplash.com/photo-1623221638187-91bd42da2de6?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center center/cover no-repeat;
+  background-attachment: fixed; /* Esto puede mejorar la nitidez en algunos navegadores */
+  image-rendering: -webkit-optimize-contrast; /* Mejora la renderización en Chrome/Safari */
+  image-rendering: crisp-edges; /* Estándar para mejorar bordes */
+  image-rendering: pixelated; /* Útil para imágenes pixeladas */
+  overflow: hidden;
+}
+
+/* Contenedor de burbujas */
+#bubbles-text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Mensaje central */
+.center-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.92);
+  color: #e91e63;
+  padding: 28px 40px;
+  border-radius: 32px;
+  font-size: 1.7rem; /* Más pequeño */
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  box-shadow: 0 8px 32px 0 rgba(33,147,176,0.25), 0 2px 8px #e91e63;
+  border: 3px solid #e91e63;
+  text-align: center;
+  z-index: 100;
+  letter-spacing: 1.2px;
+  text-shadow:
+    0 2px 8px #fff,
+    0 1px 2px #e91e63,
+    0 0 16px #6dd5ed,
+    2px 2px 8px #2193b0, /* Sombra azul */
+    0 4px 16px #e91e63;  /* Sombra rosa */
+  animation: popIn 1.2s cubic-bezier(.68,-0.55,.27,1.55), glow 2.5s infinite alternate;
+}
+
+/* Efecto de brillo */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 24px #e91e63, 0 0 48px #6dd5ed;
+  }
+  100% {
+    box-shadow: 0 0 48px #e91e63, 0 0 96px #2193b0;
+  }
+}
+
+/* Burbuja de texto */
+.text-bubble {
+  background: rgba(255,255,255,0.95);
+  color: #e91e63;
+  border-radius: 32px;
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border: 2.5px solid #6dd5ed;
+  box-shadow: 0 8px 32px rgba(33,147,176,0.18), 0 2px 8px #e91e63;
+  opacity: 0.98;
+  transition: transform 0.3s, opacity 0.8s;
+  user-select: none;
+  pointer-events: none;
+  animation: floatUp 8s linear forwards;
+  filter: blur(0.2px);
+  text-shadow: 0 2px 8px #fff, 0 1px 2px #e91e63;
+}
+
+/* Animación de burbujas */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0.2px);
+  }
+  80% {
+    opacity: 1;
+    filter: blur(0.2px);
+  }
+  100% {
+    transform: translateY(-80px) scale(1.12);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+/* Animación para el mensaje central */
+@keyframes popIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
