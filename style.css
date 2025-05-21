@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   background:
-    url('stars.jpg') center center/cover no-repeat;
+    url('https://img.freepik.com/foto-gratis/hermoso-fondo-estrellas-plateadas_23-2150160758.jpg?t=st=1747870135~exp=1747873735~hmac=718f68bd046e75240989a977ec4e28def600259525fd0df50fb6a85d0222a1b1&w=826') center center/cover no-repeat;
   background-attachment: fixed; /* Esto puede mejorar la nitidez en algunos navegadores */
   image-rendering: -webkit-optimize-contrast; /* Mejora la renderización en Chrome/Safari */
   image-rendering: crisp-edges; /* Estándar para mejorar bordes */
