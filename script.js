@@ -7,7 +7,7 @@ const messages = [
   "iluminas mi vida ⭐",
   "tu sonrisa me ilusiona ✨",
   "siempre pienso en ti 💭",
-  "mi corazon es tuyo 🤎",
+  "mi corazon es tuyo 🤎"
 ];
 
 // Lista de iconos decorativos
@@ -19,6 +19,7 @@ function createTextBubble() {
   const bubble = document.createElement("div");
   bubble.classList.add("text-bubble");
   let msg = messages[Math.floor(Math.random() * messages.length)];
+  
   // Si el mensaje es muy largo, inserta un salto de línea en el espacio más cercano al medio
   if (msg.length > 32) {
     const mid = Math.floor(msg.length / 2);
@@ -84,7 +85,9 @@ function createTextBubble() {
       bubble.style.top = "10px";
     }
     setTimeout(() => {
-      bubble.remove();
+      if (bubble.parentNode) {
+        bubble.remove();
+      }
     }, 8000);
   }, 10);
 }
@@ -107,7 +110,11 @@ function createFloatingIcon() {
   icon.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
 
   document.getElementById("bubbles-text").appendChild(icon);
-  setTimeout(() => icon.remove(), 7000);
+  setTimeout(() => {
+    if (icon.parentNode) {
+      icon.remove();
+    }
+  }, 7000);
 }
 
 // Genera un icono decorativo cada 1.2 segundos
