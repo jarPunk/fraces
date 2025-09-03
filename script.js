@@ -7,21 +7,81 @@ const messages = [
   "iluminas mi vida ⭐",
   "tu sonrisa me ilusiona ✨",
   "siempre pienso en ti 💭",
-  "mi corazon es tuyo 🤎"
+  "mi corazon es tuyo 🤎",
+  // Variaciones para reducir repetición
+  "te adoro con todo mi ser 💕",
+  "mi amor por ti no tiene fin ♾️",
+  "me enamoras cada día más 🌹",
+  "eres mi razón para sonreír 😄",
+  "no imagino mi vida sin ti 🫶",
+  "tu abrazo es mi refugio 🏡",
+  "tu mirada me derrite 🔥",
+  "eres mi paz y mi alegría ☀️",
+  "contigo todo es mejor ✨",
+  "mi alma late por ti 💓",
+  "eres mi sueño hecho realidad 💭",
+  "te quiero con locura 🥰",
+  "juntos somos invencibles 💪",
+  "eres mi compañero(a) perfecto(a) 🤝",
+  "me haces ser mejor persona 🌱",
+  "cada día contigo es una aventura 🌈",
+  "tu voz me calma el alma 🎶",
+  "mi lugar favorito es a tu lado 🏠",
+  "tu risa es mi melodía favorita 🎵",
+  "gracias por tu amor y ternura 💝",
+  "eres mi sol en días nublados ☀️",
+  "te prometo cuidarte siempre 🤍"
 ];
 
 // Lista de iconos decorativos
 const floatingIcons = ["💖", "💞", "✨", "⭐", "💗", "💘", "💝", "💓", "💙", "💜", "💛", "🤍", "🩷", "😽"];
 
+// Lista de estrellas para el efecto de lluvia
+const fallingStars = ["⭐", "✨", "🌟", "💫", "⚡", "✦", "✧", "🔯", "💥"];
+
 let lastBubbleSide = false; // false = izquierda, true = derecha
 
+// Función para crear estrellas cayendo
+function createFallingStar() {
+  const star = document.createElement("div");
+  star.className = "falling-star";
+  star.innerText = fallingStars[Math.floor(Math.random() * fallingStars.length)];
+  
+  // Posición horizontal aleatoria
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = "-20px";
+  star.style.fontSize = (Math.random() * 1.5 + 1) + "rem";
+  star.style.position = "absolute";
+  star.style.pointerEvents = "none";
+  star.style.userSelect = "none";
+  star.style.zIndex = "1";
+  star.style.opacity = Math.random() * 0.5 + 0.5;
+  
+  // Velocidad y duración aleatoria
+  const duration = Math.random() * 3 + 2; // Entre 2 y 5 segundos
+  star.style.animation = `fallDown ${duration}s linear forwards`;
+  
+  document.getElementById("bubbles-text").appendChild(star);
+  
+  setTimeout(() => {
+    if (star.parentNode) {
+      star.remove();
+    }
+  }, duration * 1000);
+}
+
+// Función mejorada para adaptarse a móvil
 function createTextBubble() {
   const bubble = document.createElement("div");
   bubble.classList.add("text-bubble");
   let msg = messages[Math.floor(Math.random() * messages.length)];
   
+  // Detectar si es móvil
+  const isMobile = window.innerWidth <= 768;
+  
   // Si el mensaje es muy largo, inserta un salto de línea en el espacio más cercano al medio
-  if (msg.length > 32) {
+  const maxLength = isMobile ? 25 : 32; // Más corto en móvil
+  if (msg.length > maxLength) {
     const mid = Math.floor(msg.length / 2);
     const spaceIdx = msg.indexOf(" ", mid);
     if (spaceIdx > 0 && spaceIdx < msg.length - 1) {
@@ -36,9 +96,15 @@ function createTextBubble() {
   else if (animType > 0.66) bubble.classList.add("from-right");
   // Si no, usa la animación por defecto (floatUp)
 
-  // Limitar zona central (por ejemplo, 30vw) para no tapar el mensaje central
-  const centerBlockVW = 30; // ancho del centro bloqueado en vw
-  const sideVW = (100 - centerBlockVW) / 2; // margen lateral en vw
+  // Configuración adaptativa para móvil
+  let centerBlockVW, sideVW;
+  if (isMobile) {
+    centerBlockVW = 20; // Zona central más pequeña en móvil
+    sideVW = (100 - centerBlockVW) / 2; // 40vw para cada lado
+  } else {
+    centerBlockVW = 30; // ancho del centro bloqueado en vw
+    sideVW = (100 - centerBlockVW) / 2; // margen lateral en vw
+  }
 
   // Medir ancho real de la burbuja en px y convertir a vw
   bubble.style.position = "absolute";
@@ -53,21 +119,25 @@ function createTextBubble() {
   // Alternar entre izquierda y derecha, asegurando que la burbuja no se salga
   lastBubbleSide = !lastBubbleSide;
   let leftVW;
+  const margin = isMobile ? 1 : 2; // Margen más pequeño en móvil
+  
   if (!lastBubbleSide) {
-    // Lado izquierdo: entre 2vw y (sideVW - ancho burbuja en vw)
-    const maxLeft = Math.max(2, sideVW - bubbleWidthVW);
-    leftVW = Math.random() * (maxLeft - 2) + 2;
+    // Lado izquierdo: entre margen y (sideVW - ancho burbuja en vw)
+    const maxLeft = Math.max(margin, sideVW - bubbleWidthVW);
+    leftVW = Math.random() * (maxLeft - margin) + margin;
   } else {
-    // Lado derecho: entre (sideVW + centerBlockVW) y (100 - ancho burbuja en vw - 2)
+    // Lado derecho: entre (sideVW + centerBlockVW) y (100 - ancho burbuja en vw - margen)
     const minRight = sideVW + centerBlockVW;
-    const maxRight = Math.min(100 - bubbleWidthVW - 2, minRight + sideVW - 2);
+    const maxRight = Math.min(100 - bubbleWidthVW - margin, minRight + sideVW - margin);
     leftVW = Math.random() * (maxRight - minRight) + minRight;
   }
   // Convierte a px
   const leftPx = (window.innerWidth * leftVW) / 100;
 
-  // Posición vertical aleatoria (10vh a 80vh)
-  const top = Math.random() * 70 + 10;
+  // Posición vertical aleatoria adaptativa
+  const topRange = isMobile ? 60 : 70; // Menos rango vertical en móvil
+  const topStart = isMobile ? 15 : 10;
+  const top = Math.random() * topRange + topStart;
   bubble.style.left = `${leftPx}px`;
   bubble.style.top = `${top}vh`;
 
@@ -119,3 +189,17 @@ function createFloatingIcon() {
 
 // Genera un icono decorativo cada 1.2 segundos
 setInterval(createFloatingIcon, 1200);
+
+// Genera estrellas cayendo - frecuencia adaptativa según dispositivo
+const isMobileDevice = window.innerWidth <= 768;
+const starInterval = isMobileDevice ? 1200 : 800; // Menos frecuente en móvil
+setInterval(createFallingStar, starInterval);
+
+// Reajustar intervalos si cambia el tamaño de pantalla
+window.addEventListener('resize', () => {
+  const newIsMobile = window.innerWidth <= 768;
+  if (newIsMobile !== isMobileDevice) {
+    // Reiniciar la página para aplicar los cambios
+    location.reload();
+  }
+});

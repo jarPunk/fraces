@@ -4,18 +4,12 @@ body {
   min-width: 100vw;
   margin: 0;
   padding: 0;
-  background: 
-    l.text-bubble.from-left {
-  animation: slideInLeft 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatLeft 12s ease-out 1.8s forwards;
-}
-.text-bubble.from-right {
-  animation: slideInRight 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatRight 12s ease-out 1.8s forwards;
-}gradient(45deg, 
-      rgba(255, 107, 107, 0.1) 0%,
-      rgba(255, 154, 158, 0.1) 25%,
-      rgba(250, 208, 196, 0.1) 50%,
-      rgba(134, 168, 231, 0.1) 75%,
-      rgba(76, 161, 175, 0.1) 100%
+  background: linear-gradient(45deg,
+      rgba(255, 107, 107, 0.08) 0%,
+      rgba(255, 154, 158, 0.06) 25%,
+      rgba(250, 208, 196, 0.06) 50%,
+      rgba(134, 168, 231, 0.06) 75%,
+      rgba(76, 161, 175, 0.06) 100%
     ),
     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(255, 159, 243, 0.3) 0%, transparent 50%),
@@ -454,44 +448,148 @@ body::before {
   50% { transform: scale(1.1) rotate(1deg); }
 }
 
+/* Estrellas cayendo */
+.falling-star {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 /* Responsive: pantallas pequeñas (móviles) */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .center-message {
-    font-size: 1.2rem;
-    padding: 20px 24px;
+    font-size: 1.1rem;
+    padding: 16px 20px;
     border-radius: 16px;
-    max-width: 90vw;
+    max-width: 85vw;
     word-break: break-word;
     font-weight: 500;
+    line-height: 1.4;
+    top: 45%; /* Posición más alta para dar más espacio */
   }
+  
   .text-bubble {
-    font-size: 0.9rem;
-    padding: 12px 16px;
-    border-radius: 14px;
-    max-width: 85vw;
-    min-width: 60px;
-    margin-left: 0;
-    margin-right: 0;
-    left: 50% !important;
-    transform: translateX(-50%);
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 75vw;
+    min-width: 50px;
     box-sizing: border-box;
     word-break: normal;
     overflow-wrap: break-word;
     white-space: pre-line;
     text-align: center;
     line-height: 1.3;
+    /* Eliminar el posicionamiento forzado del CSS anterior */
   }
+  
+  .text-bubble.from-left {
+    animation: slideInLeftMobile 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatUpMobile 7s ease-out 1.2s forwards;
+  }
+  
+  .text-bubble.from-right {
+    animation: slideInRightMobile 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatUpMobile 7s ease-out 1.2s forwards;
+  }
+  
+  /* Animaciones específicas para móvil */
+  @keyframes slideInLeftMobile {
+    0% {
+      transform: translateX(-100vw) scale(0.7);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRightMobile {
+    0% {
+      transform: translateX(100vw) scale(0.7);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes floatUpMobile {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-80px) scale(1.05);
+      opacity: 0;
+    }
+  }
+  
   #bubbles-text {
     width: 100vw;
     height: 100vh;
   }
+  
   .floating-icon {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
-  .sparkle-particle {
+  
+  .falling-star {
     font-size: 1rem !important;
   }
-  .floating-heart {
-    font-size: 1.5rem !important;
+}
+
+/* Responsive: pantallas muy pequeñas (móviles pequeños) */
+@media (max-width: 480px) {
+  .center-message {
+    font-size: 1rem;
+    padding: 14px 18px;
+    top: 40%;
+    max-width: 90vw;
+  }
+  
+  .text-bubble {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    max-width: 80vw;
+    border-radius: 10px;
+  }
+  
+  .floating-icon {
+    font-size: 1.1rem;
+  }
+  
+  .falling-star {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Responsive: tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .center-message {
+    font-size: 1.5rem;
+    padding: 24px 36px;
+  }
+  
+  .text-bubble {
+    font-size: 1rem;
+    padding: 14px 20px;
+    max-width: 300px;
   }
 }
