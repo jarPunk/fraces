@@ -143,10 +143,12 @@ body {
 }
 
 .text-bubble.from-left {
-  animation: slideInLeft 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatLeft 10s ease-out 1.5s forwards;
+  /* Aparición directa: animación corta de 'pop' seguida del movimiento flotante */
+  animation: bubblePopIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), floatLeft 10s ease-out 0.6s forwards;
 }
 .text-bubble.from-right {
-  animation: slideInRight 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatRight 10s ease-out 1.5s forwards;
+  /* Aparición directa: animación corta de 'pop' seguida del movimiento flotante */
+  animation: bubblePopIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), floatRight 10s ease-out 0.6s forwards;
 }
 
 /* Nuevas animaciones de entrada desde los lados */
@@ -497,11 +499,13 @@ body::before {
   }
   
   .text-bubble.from-left {
-    animation: slideInLeftMobile 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatUpMobile 7s ease-out 1.2s forwards;
+    /* Aparición directa en móvil: pop rápido y subida suave */
+    animation: bubblePopIn 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), floatUpMobile 7s ease-out 0.45s forwards;
   }
   
   .text-bubble.from-right {
-    animation: slideInRightMobile 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), floatUpMobile 7s ease-out 1.2s forwards;
+    /* Aparición directa en móvil: pop rápido y subida suave */
+    animation: bubblePopIn 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), floatUpMobile 7s ease-out 0.45s forwards;
   }
   
   /* Animaciones específicas para móvil */
