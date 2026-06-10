@@ -1,0 +1,10 @@
+:root {
+  --wa-bg: #e5ddd5;
+  --wa-sent: #dcf8c6;
+  --wa-received: #ffffff;
+  --wa-text: #303030;
+  --wa-time: #999;
+  --wa-accent: #0088cc;
+  --wa-footer: #f0f0f0;
+  --font-main: 'Segoe UI', sans-serif;
+}

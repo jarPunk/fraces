@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>💖 Mensajes de Amor Flotantes ✨</title>
-        <meta name="description" content="Hermosos mensajes inspiradores flotando como burbujas mágicas">
-        <meta name="keywords" content="amor, mensajes, burbujas, romántico, inspiración">
-        <meta name="author" content="Fraces de Amor">
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <!-- Icono para la pestaña del navegador -->
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
-        <!-- Meta tags para redes sociales -->
-        <meta property="og:title" content="💖 Mensajes de Amor Flotantes ✨">
-        <meta property="og:description" content="Hermosos mensajes inspiradores flotando como burbujas mágicas">
-        <meta property="og:type" content="website">
-        <meta name="twitter:card" content="summary">
-    </head>
-    <body>
-        <div class="center-message">
-            ¡Eres el amor de mi vida! 💖 ✨💖
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="src/css/main.css">
+</head>
+<body>
+<body>
+    <!-- Modal "Bienvenida" -->
+    <div id="welcome-modal" class="modal-overlay">
+        <div class="modal">
+            <h2>💖</h2>
+            <p>¡Eres el amor de mi vida!</p>
+            <button id="modal-ok-btn" class="start-btn">Comenzar</button>
         </div>
-        <div id="bubbles-text"></div>
-        <script src="script.js"></script>
-    </body>
+    </div>
+
+    <!-- Interfaz principal -->
+    <div id="main-interface" class="screen">
+        <div class="header">
+            <i data-lucide="chevron-left"></i>
+            <div class="profile-pic"></div>
+            <div class="header-info">
+                <span id="display-name">Oswald</span>
+                <span id="typing-indicator" class="typing">escribiendo...</span>
+            </div>
+            <div class="header-actions">
+                <i data-lucide="video"></i>
+                <i data-lucide="phone"></i>
+            </div>
+        </div>
+        <div id="chat-container"></div>
+        <div class="footer">
+            <i data-lucide="plus" class="icon-button"></i>
+            <input type="text" id="message-input" class="input-box-chat" placeholder="Mensaje...">
+            <i data-lucide="camera" class="icon-button"></i>
+            <i data-lucide="send" id="send-btn" class="icon-button"></i>
+        </div>
+    </div>
+    <script type="module" src="src/js/app.js"></script>
+</body>
 </html>

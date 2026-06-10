@@ -1,0 +1,35 @@
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(1.05); opacity: 0; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bubblePopIn {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes floatLeft {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(-30px) translateY(-120px); opacity: 0; }
+}
+
+@keyframes floatRight {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(30px) translateY(-120px); opacity: 0; }
+}
+
+@keyframes fallDown {
+  0% { transform: translateY(-20px); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
