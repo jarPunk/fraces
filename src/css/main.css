@@ -1,14 +1,14 @@
 /* Layout Básico */
 body { 
     margin: 0; padding: 0; 
-    height: 100vh; /* Ajuste para asegurar que el cuerpo no se desborde */
+    height: 100dvh; /* Usar dvh para adaptarse dinámicamente al teclado/navegador */
     width: 100vw;
     background-image: url('../../fondo.jpg'); background-size: cover; background-position: center; background-attachment: fixed; 
     font-family: 'Segoe UI', sans-serif; 
     overflow: hidden; 
     display: flex; 
     flex-direction: column; 
-    position: fixed; top: 0; left: 0; 
+    /* Eliminamos position: fixed que causa el desbordamiento en móviles */
 }
 .screen { height: 100%; width: 100%; display: flex; flex-direction: column; }
 
