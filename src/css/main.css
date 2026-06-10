@@ -8,10 +8,11 @@ body {
     background-position: center; 
     background-attachment: fixed; 
     font-family: 'Segoe UI', sans-serif; 
-    /* IMPORTANTE: Permitir que el body se encoja cuando aparece el teclado */
-    overflow-y: auto; 
+    overflow: hidden; 
     display: flex; 
     flex-direction: column; 
+    /* Esto bloquea el zoom y mantiene el tamaño */
+    touch-action: manipulation;
 }
 
 /* Forzar que el contenedor principal ocupe el espacio */
